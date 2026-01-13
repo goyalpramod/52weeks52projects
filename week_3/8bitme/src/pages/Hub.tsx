@@ -6,7 +6,7 @@ import door from '../assets/elements/door_1.png'
 
 const Hub = () => {
     return (
-    <div className="" style={{ backgroundColor: '#79C8F2', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'}}>
+    <div style={{ backgroundColor: '#79C8F2', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'}}>
         <img style={{ position: 'absolute',bottom: '0', transform: 'translateY(43%)'}} src={ground} alt=''/>
         <img style={{ position: 'absolute',bottom: '0', transform: 'translateY(27%) scale(0.2)'}} src={character} alt=''/>
         <img style={{ position: 'absolute',bottom: '0', transform: 'translateY(27%) translateX(40%) scale(0.2)'}} src={door} alt=''/>
