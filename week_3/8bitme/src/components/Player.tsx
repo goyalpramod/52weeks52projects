@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import charIdle1 from '../assets/character/char_idle_1.png'
 import charIdle2 from '../assets/character/char_idle_2.png'
+import charIdle3 from '../assets/character/char_idle_3.png'
 import charIdle4 from '../assets/character/char_idle_4.png'
 import charSkate1 from '../assets/character/char_skate_1.png'
 import charSkate2 from '../assets/character/char_skate_2.png'
@@ -18,12 +19,52 @@ const Player = () => {
     const frames = playerState === 'idle' ? idleFrames : skateFrames
     const currentImage = frames[currentFrame]
 
+    const keysPressed = useRef<Set<string>>(new Set())
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        const movementKeys = ['ArrowRight', 'ArrowLeft', 'a', 'd']
+        const wasAlreadyMoving = movementKeys.some(key => keysPressed.current.has(key))
+    
+        keysPressed.current.add(e.key)
+
+        if(movementKeys.includes(e.key)){
+            setPlayerState('skating')
+            // Only reset frame if this is the first movement key pressed
+            if (!wasAlreadyMoving) {
+                setCurrentFrame(0)
+            }
+        }
+    }
+
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+        keysPressed.current.delete(e.key)
+
+        const movementKeys = ['ArrowRight', 'ArrowLeft', 'a', 'd']
+        const anyMovementKeyHeld = movementKeys.some(key => keysPressed.current.has(key))
+
+        if (!anyMovementKeyHeld){
+            setPlayerState('idle')
+            setCurrentFrame(0)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+        }
+    },[]
+    );
+
     useEffect(() => {
         if (playerState === 'idle'){
             if (currentFrame === 0){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(1)
-                },3000)
+                },1500)
             }else if (currentFrame === 1){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(2)
@@ -33,7 +74,7 @@ const Player = () => {
             if (currentFrame === 0){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(1)
-                },500)
+                },100)
             }else if (currentFrame === 1){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(2)
@@ -47,34 +88,21 @@ const Player = () => {
         }
     }, [playerState, currentFrame])
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'ArrowRight' || e.key === 'd'){
-            setPosition(prev => ({...prev, x: prev.x + 10 }))
-        }else if (e.key === 'ArrowLeft' || e.key === 'a'){
-            setPosition(prev => ({...prev, x: prev.x - 10}))
-        }
-        if (['ArrowRight', 'ArrowLeft', 'a', 'd'].includes(e.key)){
-            if (playerState !== 'skating'){
-                setPlayerState('skating')
-                setCurrentFrame(0)
-            }
-        }
-    }
-    const handleKeyUp = (e: KeyboardEvent) => {
-        setPlayerState('idle')
-        setCurrentFrame(0)
-    }
+    
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('keyup', handleKeyUp);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
-        }
-    },[]
+        const gameLoop = setInterval(() => {
+            if (keysPressed.current.has('ArrowRight') || keysPressed.current.has('d')){
+                setPosition(prev => ({...prev, x: prev.x + 40 }))
+            }
+            if (keysPressed.current.has('ArrowLeft') || keysPressed.current.has('a')){
+                setPosition(prev => ({...prev, x: prev.x - 40}))
+            }
+        }, 30)
 
-    );
+        return () => clearInterval(gameLoop)
+    },[]);
+
 
     return(
         <img src={currentImage} className='scale-20' style={{ transform: `translateX(${position.x}px)` }} alt="" />
