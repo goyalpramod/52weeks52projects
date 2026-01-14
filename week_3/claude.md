@@ -125,3 +125,35 @@ Even with 8-bit styling:
 
 ## Development Philosophy
 This is about learning by doing. The journey of figuring out CSS tricks for pixel art, implementing game-like interactions in React, and solving problems independently is the goal.
+
+---
+
+## Character Animation Implementation
+
+### Character Assets
+Located in: `src/assets/character/`
+
+### State Definitions
+
+#### Idle State (3 frames)
+- **Frame 1**: Initial idle pose (default)
+- **Frame 2**: Transition frame (shown after 3 seconds of no input, display for 0.5 seconds)
+- **Frame 3**: Final resting pose (stays until a key is pressed)
+
+#### Skating State (3 frames)
+- **Frame 1**: Start skating animation
+- **Frame 2**: Transition frame
+- **Frame 3**: Full skating pose (stays with jitter effect for realism)
+
+### Implementation Todo
+1. Create Player component with idle and skating states
+2. Add keyboard event handlers for movement
+3. Implement state transitions with timers
+4. Add jitter effect for skating frame 3
+
+### Learning Resources
+- requestAnimationFrame: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+- React game loop: https://css-tricks.com/using-requestanimationframe-with-react-hooks/
+- Keyboard events: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+- Sprite animation: https://spicyyoghurt.com/tutorials/html5-javascript-game-development/images-and-sprite-animations
+- State pattern: https://gameprogrammingpatterns.com/state.html
