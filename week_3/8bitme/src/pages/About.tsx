@@ -1,5 +1,6 @@
 import backgroundMountain from '../assets/background/mountains.png'
 import monk from '../assets/character/monk.png'
+import Player from '../components/Player';
 
 // arrayOfMonkDialoges = [
 //     "Greetings fellow traveler, what brings you here?",
@@ -20,7 +21,10 @@ const About = () => {
         src={backgroundMountain} 
         alt=''
         />
-        <img src={monk} className='absolute bottom-40 left-100 scale-160' alt=''/>
+        <img src={monk} className='absolute bottom-40 left-300 scale-160' alt=''/>
+        <div className='translate-y-28'>
+            <Player/>
+        </div>
     </div>
     );
 }

@@ -1,6 +1,7 @@
 import backgroundTrophy from '../assets/background/trophy.png'
 import alfred from '../assets/character/butler.png'
 import PixelBubble from '../components/PixelBubble';
+import Player from '../components/Player';
 
 // const arrayOfAlfredDialogues = [
 //     "Hello Master ****, What brings you here",
@@ -24,7 +25,10 @@ const Projects = () => {
         <PixelBubble className="absolute bottom-150 left-20">
             Hello! I am a React Component.
         </PixelBubble>
-        <img src={alfred} className='absolute bottom-40 left-100 scale-160' alt=''/>
+        <div className='translate-y-8'>
+            <Player/>
+        </div>
+        <img src={alfred} className='absolute bottom-40 left-300 scale-160' alt=''/>
     </div>
     );
 }

@@ -72,7 +72,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
             if (currentFrame === 0){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(1)
-                },1500)
+                },3000)
             }else if (currentFrame === 1){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(2)

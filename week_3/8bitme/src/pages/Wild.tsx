@@ -1,5 +1,6 @@
 import backgroundJail from '../assets/background/dungeon.png'
 import genie from '../assets/character/genie.png'
+import Player from '../components/Player';
 
 // arrayOfGenieDialoges = [
 //     "YOU DARE ENTER THE FORBIDDEN TOMB MORTAL",
@@ -25,7 +26,10 @@ const Wild = () => {
         src={backgroundJail} 
         alt=''
         />
-        <img src={genie} className='absolute bottom-40 left-100 scale-160' alt=''/>
+        <div className='translate-y-28'>
+            <Player/>
+        </div>
+        <img src={genie} className='absolute bottom-40 left-250 scale-160' alt=''/>
     </div>
     );
 }
