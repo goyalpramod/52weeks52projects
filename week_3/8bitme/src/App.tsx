@@ -2,7 +2,7 @@ import Fun from './pages/Fun';
 import Wild from './pages/Wild';
 import Projects from './pages/Projects';
 import Hub from './pages/Hub';
-import Start from './pages/Start';
+import Start from './pages/Start';  
 import About from './pages/About';
 import { BrowserRouter, Routes, Route } from "react-router";
 

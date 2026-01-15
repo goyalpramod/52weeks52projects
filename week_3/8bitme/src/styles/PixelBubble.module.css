@@ -1,0 +1,50 @@
+/* PixelBubble.module.css */
+
+/* Code taken from this beautiful codepen -> https://codepen.io/rombicombi/pen/NWExpaa?anon=true&view=pen */
+
+.bubble {
+  --pixel-size: 4px;
+  --bg-color: #fff;
+  --text-color: #000;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  
+  box-shadow: 
+    0 calc(-1 * var(--pixel-size)) var(--bg-color),
+    0 calc(-2 * var(--pixel-size)) var(--text-color),
+    var(--pixel-size) 0 var(--bg-color),
+    var(--pixel-size) calc(-1 * var(--pixel-size)) var(--text-color),
+    calc(2 * var(--pixel-size)) 0 var(--text-color),
+    0 var(--pixel-size) var(--bg-color),
+    0 calc(2 * var(--pixel-size)) var(--text-color),
+    calc(-1 * var(--pixel-size)) 0 var(--bg-color),
+    calc(-1 * var(--pixel-size)) var(--pixel-size) var(--text-color),
+    calc(-2 * var(--pixel-size)) 0 var(--text-color),
+    calc(-1 * var(--pixel-size)) calc(-1 * var(--pixel-size)) var(--text-color),
+    var(--pixel-size) var(--pixel-size) var(--text-color);
+}
+
+/* TAIL LOGIC: We only define the shape here, positioning is handled in React */
+.tail-bottom::after {
+  content: '';
+  position: absolute;
+  width: var(--pixel-size);
+  height: var(--pixel-size);
+  background: var(--bg-color);
+  bottom: calc(-2 * var(--pixel-size));
+  left: 20%;
+  
+  box-shadow: 
+    0 var(--pixel-size) var(--text-color),
+    0 calc(2 * var(--pixel-size)) var(--text-color),
+    0 calc(3 * var(--pixel-size)) var(--text-color),
+    0 calc(4 * var(--pixel-size)) var(--text-color),
+    calc(-1 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--text-color),
+    calc(-2 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--text-color),
+    calc(-3 * var(--pixel-size)) var(--pixel-size) var(--text-color),
+    calc(-1 * var(--pixel-size)) var(--pixel-size) var(--bg-color),
+    calc(-2 * var(--pixel-size)) var(--pixel-size) var(--bg-color),
+    calc(-1 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--bg-color),
+    calc(-1 * var(--pixel-size)) 0 var(--bg-color),
+    calc(-2 * var(--pixel-size)) 0 var(--bg-color),
+    calc(-3 * var(--pixel-size)) 0 var(--bg-color);
+}

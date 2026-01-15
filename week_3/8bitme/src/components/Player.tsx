@@ -21,6 +21,8 @@ const Player = () => {
 
     const keysPressed = useRef<Set<string>>(new Set())
 
+    const [direction, setDirection] = useState<'left'|'right'>('right')
+
     const handleKeyDown = (e: KeyboardEvent) => {
         const movementKeys = ['ArrowRight', 'ArrowLeft', 'a', 'd']
         const wasAlreadyMoving = movementKeys.some(key => keysPressed.current.has(key))
@@ -32,6 +34,12 @@ const Player = () => {
             // Only reset frame if this is the first movement key pressed
             if (!wasAlreadyMoving) {
                 setCurrentFrame(0)
+            }
+
+            if(e.key === 'ArrowRight' || e.key ==='d'){
+                setDirection('right')
+            } else if(e.key === 'ArrowLeft' || e.key === 'a'){
+                setDirection('left')
             }
         }
     }
@@ -78,7 +86,7 @@ const Player = () => {
             }else if (currentFrame === 1){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(2)
-                }, 200)
+                }, 150)
             }
         }
         return () => {
@@ -92,11 +100,16 @@ const Player = () => {
 
     useEffect(() => {
         const gameLoop = setInterval(() => {
+            const characterWidth = 0
+            // const maxX = window.innerWidth - characterWidth
+            const maxX = 2600
+            const minX = -50
+
             if (keysPressed.current.has('ArrowRight') || keysPressed.current.has('d')){
-                setPosition(prev => ({...prev, x: prev.x + 40 }))
+                setPosition(prev => ({...prev, x: Math.min(prev.x + 40, maxX) }))
             }
             if (keysPressed.current.has('ArrowLeft') || keysPressed.current.has('a')){
-                setPosition(prev => ({...prev, x: prev.x - 40}))
+                setPosition(prev => ({...prev, x: Math.max(prev.x - 40, minX)}))
             }
         }, 30)
 
@@ -105,7 +118,7 @@ const Player = () => {
 
 
     return(
-        <img src={currentImage} className='scale-20' style={{ transform: `translateX(${position.x}px)` }} alt="" />
+        <img src={currentImage} className='scale-40 z-50' style={{ transform: `translateX(${position.x}px) scaleX(${direction === 'left' ? -1 : 1})` }} alt="" />
     );
 }
 
