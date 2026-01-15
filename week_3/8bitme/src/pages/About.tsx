@@ -1,16 +1,16 @@
 import backgroundMountain from '../assets/background/mountains.png'
 import monk from '../assets/character/monk.png'
 
-arrayOfMonkDialoges = [
-    "Greetings fellow traveler, what brings you here?",
-    "Are we all not?",
-    "None of us do... let me help you out. Press I."
-]
+// arrayOfMonkDialoges = [
+//     "Greetings fellow traveler, what brings you here?",
+//     "Are we all not?",
+//     "None of us do... let me help you out. Press I."
+// ]
 
-arrayOfCharacterDialoges = [
-    "I am lost",
-    "I meant...I do not know whoiam",
-]
+// arrayOfCharacterDialoges = [
+//     "I am lost",
+//     "I meant...I do not know whoiam",
+// ]
 
 const About = () => {
     return (

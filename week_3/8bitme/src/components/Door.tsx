@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import door from '../assets/elements/door_1.png'
-import doorOpen from '../assets/elements/door_2.png'
+import doorOpen from '../assets/elements/door_3.png'
 import { useNavigate } from 'react-router';
 
 interface DoorProps {
@@ -12,7 +12,11 @@ interface DoorProps {
 
 const Door = ({ label, destination, doorX, playerX }: DoorProps) => {
     const navigate = useNavigate()
-    const isNear = Math.abs(playerX - doorX) < 100
+    const playerCenter = playerX + 80  
+    const doorCenter = doorX + 100
+    const isNear = Math.abs(playerCenter - doorCenter) < 150
+
+
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -27,9 +31,9 @@ const Door = ({ label, destination, doorX, playerX }: DoorProps) => {
     }, [playerX, doorX, destination, navigate])
 
     return (
-        <div  style={{ position: 'absolute', bottom: '0' }}>
-            <p style={{ textAlign: 'center', color: 'white', fontFamily: '"Press Start 2P", cursive' }}>{label}</p>
-            <img style={{ position: 'absolute',bottom: '0', transform: 'translateY(9%) scale(0.35)'}} src={isNear ? doorOpen : door}  alt=''/>
+        <div className='absolute bottom-48 flex flex-col items-center' style={{ left: doorX }}>
+            <p className='text-nowrap text-white text-center translate-y-18' style={{ fontFamily: '"Press Start 2P", cursive' }}>{label}</p>
+            <img className='scale-75' src={isNear ? doorOpen : door} alt='' />
         </div>
     );
 
