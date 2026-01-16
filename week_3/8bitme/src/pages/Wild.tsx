@@ -1,6 +1,7 @@
 import backgroundJail from '../assets/background/dungeon.png'
 import genie from '../assets/character/genie.png'
 import Player from '../components/Player';
+import useEscapeToHub from '../hooks/useEscapeToHub';
 
 // arrayOfGenieDialoges = [
 //     "YOU DARE ENTER THE FORBIDDEN TOMB MORTAL",
@@ -19,6 +20,7 @@ import Player from '../components/Player';
 // Give hints panel that says, accept you are stupid and take the answer
 
 const Wild = () => {
+    useEscapeToHub()
     return (
     <div className='position-absolute'>
         <img 

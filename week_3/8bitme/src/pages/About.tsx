@@ -1,6 +1,7 @@
 import backgroundMountain from '../assets/background/mountains.png'
 import monk from '../assets/character/monk.png'
 import Player from '../components/Player';
+import useEscapeToHub from '../hooks/useEscapeToHub';
 
 // arrayOfMonkDialoges = [
 //     "Greetings fellow traveler, what brings you here?",
@@ -14,6 +15,7 @@ import Player from '../components/Player';
 // ]
 
 const About = () => {
+    useEscapeToHub()
     return (
     <div className='position-absolute'>
         <img 

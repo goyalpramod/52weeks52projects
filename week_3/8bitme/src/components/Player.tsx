@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import charIdle1 from '../assets/character/char_idle_1.png'
 import charIdle2 from '../assets/character/char_idle_2.png'
-import charIdle3 from '../assets/character/char_idle_3.png'
 import charIdle4 from '../assets/character/char_idle_4.png'
 import charSkate1 from '../assets/character/char_skate_1.png'
 import charSkate2 from '../assets/character/char_skate_2.png'

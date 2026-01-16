@@ -2,6 +2,7 @@ import backgroundTrophy from '../assets/background/trophy.png'
 import alfred from '../assets/character/butler.png'
 import PixelBubble from '../components/PixelBubble';
 import Player from '../components/Player';
+import useEscapeToHub from '../hooks/useEscapeToHub';
 
 // const arrayOfAlfredDialogues = [
 //     "Hello Master ****, What brings you here",
@@ -15,6 +16,7 @@ import Player from '../components/Player';
 // ]
 
 const Projects = () => {
+    useEscapeToHub()
     return (
     <div className='position-absolute'>
         <img 
