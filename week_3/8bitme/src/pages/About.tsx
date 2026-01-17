@@ -1,13 +1,10 @@
 import backgroundMountain from '../assets/background/mountains.png'
 import monk from '../assets/character/monk.png'
+import NPC from '../components/NPC';
 import Player from '../components/Player';
 import useEscapeToHub from '../hooks/useEscapeToHub';
 
-// arrayOfMonkDialoges = [
-//     "Greetings fellow traveler, what brings you here?",
-//     "Are we all not?",
-//     "None of us do... let me help you out. Press I."
-// ]
+import { useState } from 'react';
 
 // arrayOfCharacterDialoges = [
 //     "I am lost",
@@ -16,6 +13,14 @@ import useEscapeToHub from '../hooks/useEscapeToHub';
 
 const About = () => {
     useEscapeToHub()
+    const [playerPosition, setPlayerPosition] = useState<{x: number, y: number}>({ x:0, y:0 })
+
+    const arrayOfMonkDialoges = [
+    "Greetings fellow traveler, what brings you here?",
+    "Are we all not?",
+    "None of us do... let me help you out. Press I."
+    ]
+
     return (
     <div className='position-absolute'>
         <img 
@@ -23,9 +28,11 @@ const About = () => {
         src={backgroundMountain} 
         alt=''
         />
-        <img src={monk} className='absolute bottom-40 left-300 scale-160' alt=''/>
-        <div className='translate-y-28'>
-            <Player/>
+        <div>
+            <NPC NPCX={1200} playerX={playerPosition.x} char={monk} dialogues={arrayOfMonkDialoges}></NPC>
+        </div>
+        <div className='absolute top-28'>
+            <Player onPositionChange={(pos) => setPlayerPosition(pos)}/>
         </div>
     </div>
     );
