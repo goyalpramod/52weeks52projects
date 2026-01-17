@@ -5,7 +5,7 @@ import charIdle4 from '../assets/character/char_idle_4.png'
 import charSkate1 from '../assets/character/char_skate_1.png'
 import charSkate2 from '../assets/character/char_skate_2.png'
 
-const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRightBoundary?: () => void, onLeftBoundary?: () => void , onPositionChange?: (pos: {x: number, y: number}) => void}) => {
+const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange, isDialogActive }: { onRightBoundary?: () => void, onLeftBoundary?: () => void , onPositionChange?: (pos: {x: number, y: number}) => void, isDialogActive ?: boolean}) => {
     const [playerState, setPlayerState] = useState<'idle'|'skating'>('idle')
     const [currentFrame, setCurrentFrame] = useState<number>(0)
     const [position, setPosition] = useState<{x: number, y:number}>({ x:0, y: 0})
@@ -28,7 +28,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
     
         keysPressed.current.add(e.key)
 
-        if(movementKeys.includes(e.key)){
+        if(movementKeys.includes(e.key) && !isDialogActive){
             setPlayerState('skating')
             // Only reset frame if this is the first movement key pressed
             if (!wasAlreadyMoving) {
@@ -50,7 +50,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
         const movementKeys = ['ArrowRight', 'ArrowLeft', 'a', 'd']
         const anyMovementKeyHeld = movementKeys.some(key => keysPressed.current.has(key))
 
-        if (!anyMovementKeyHeld){
+        if (!anyMovementKeyHeld && !isDialogActive){
             setPlayerState('idle')
             setCurrentFrame(0)
         }
@@ -67,7 +67,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
     );
 
     useEffect(() => {
-        if (playerState === 'idle'){
+        if ((playerState === 'idle')  && !isDialogActive){
             if (currentFrame === 0){
                 idleTimerRef.current = setTimeout(() => {
                     setCurrentFrame(1)
@@ -93,7 +93,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
                 clearTimeout(idleTimerRef.current)
             }
         }
-    }, [playerState, currentFrame])
+    }, [playerState, currentFrame, isDialogActive])
 
     
 
@@ -102,7 +102,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
             const maxX = 2300
             const minX = 0
 
-            if (keysPressed.current.has('ArrowRight') || keysPressed.current.has('d')){
+            if ((keysPressed.current.has('ArrowRight') || keysPressed.current.has('d')) && !isDialogActive){
                 setPosition(prev => {
                     const newX = Math.min(prev.x + 40, maxX)
                     const newPos = { ...prev, x: newX }
@@ -113,7 +113,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
                     return newPos
                 })
             }
-            if (keysPressed.current.has('ArrowLeft') || keysPressed.current.has('a')){
+            if ((keysPressed.current.has('ArrowLeft') || keysPressed.current.has('a')) && !isDialogActive){
                 setPosition(prev => {
                     const newX = Math.max(prev.x -40, minX)
                     const newPos = { ...prev, x: newX}
@@ -128,7 +128,7 @@ const Player = ({ onRightBoundary, onLeftBoundary, onPositionChange }: { onRight
         }, 30)
 
         return () => clearInterval(gameLoop)
-    },[]);
+    },[isDialogActive]);
 
 
     return(
