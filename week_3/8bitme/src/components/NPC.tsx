@@ -47,7 +47,6 @@ const NPC = ({ NPCX, playerX, char, dialogues, onDialogueChange}: NPCProps) => {
 
     return (
         <div className="absolute bottom-32" style={{left: NPCX}}>
-  
             {isNear && (dialogueIndex < dialogues.length) && <PixelBubble 
                 variant={dialogues[dialogueIndex].speaker === 'player' ? 'primary' : 'default'}
                 className="absolute bottom-9"
@@ -55,9 +54,7 @@ const NPC = ({ NPCX, playerX, char, dialogues, onDialogueChange}: NPCProps) => {
                 {dialogues[dialogueIndex].text}
                 </PixelBubble>
                 }
-            
             <img className="scale-125" src={char} /> 
-        
         </div>
 
     );
